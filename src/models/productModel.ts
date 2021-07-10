@@ -9,6 +9,9 @@ const schema = new Schema({
   price: {
     type: Number,
   },
+  description: {
+    type: String,
+  },
   image: {
     type: String,
   },

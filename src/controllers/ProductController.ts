@@ -6,7 +6,7 @@ const unlink = promisify(fs.unlink)
 
 async function getAll(req: Request, res: Response) {
   try {
-    const data = await productModel.find()
+    const data = await productModel.find().limit(4)
     return res.status(200).send(data)
   } catch (error) {
     return res.status(400).send({ message: 'DEU ERRO!' })
@@ -38,6 +38,7 @@ async function Update(req: Request, res: Response) {
       $set: {
         title: req.body.title,
         price: req.body.price,
+        description: req.body.description,
         image: req.body.image,
       },
     })
