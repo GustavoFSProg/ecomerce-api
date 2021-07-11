@@ -8,6 +8,7 @@ const upload = multer(uploadConfig)
 const ProductsRoutes = Router()
 
 ProductsRoutes.get('/', ProductController.getAll)
+ProductsRoutes.get('/:id', ProductController.getById)
 ProductsRoutes.post(
   '/register',
 

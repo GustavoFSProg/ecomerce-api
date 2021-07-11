@@ -13,6 +13,15 @@ async function getAll(req: Request, res: Response) {
   }
 }
 
+async function getById(req: Request, res: Response) {
+  try {
+    const data = await productModel.findById(req.params.id)
+    return res.status(200).send(data)
+  } catch (error) {
+    return res.status(400).send({ message: 'DEU ERRO!' })
+  }
+}
+
 async function ProductRegister(req: Request, res: Response) {
   try {
     const { filename: image } = req.file
@@ -71,4 +80,4 @@ async function deleteOne(req: Request, res: Response) {
   }
 }
 
-export default { getAll, ProductRegister, deleteOne, Update }
+export default { getAll, getById, ProductRegister, deleteOne, Update }
