@@ -6,7 +6,7 @@ const unlink = promisify(fs.unlink)
 
 async function getAll(req: Request, res: Response) {
   try {
-    const data = await productModel.find().limit(4)
+    const data = await productModel.find()
     return res.status(200).send(data)
   } catch (error) {
     return res.status(400).send({ message: 'DEU ERRO!' })
@@ -31,6 +31,7 @@ async function ProductRegister(req: Request, res: Response) {
 
     await productModel.create({
       title: req.body.title,
+      description: req.body.description,
       price: req.body.price,
       image: filename,
     })
@@ -64,9 +65,6 @@ async function deleteOne(req: Request, res: Response) {
 
     const imagem = await productModel.findById(id)
 
-    console.log(imagem.image)
-
-    console.log('entrou')
     await productModel.findByIdAndDelete(id)
 
     fs.unlink(`uploads/${imagem.image}`, (err) => {
@@ -80,4 +78,23 @@ async function deleteOne(req: Request, res: Response) {
   }
 }
 
-export default { getAll, getById, ProductRegister, deleteOne, Update }
+async function deleteAll(req: Request, res: Response) {
+  try {
+    const { id } = req.params
+
+    const imagem = await productModel.findById(id)
+
+    await productModel.deleteMany()
+
+    fs.unlink(`uploads/${imagem.image}`, (err) => {
+      if (err) throw err
+      console.log('uploads/file.txt was deleted')
+    })
+
+    return res.status(201).send({ message: 'Product Deleted with success!' })
+  } catch (error) {
+    return res.status(400).send({ Mensagem: 'All cagado!!', error })
+  }
+}
+
+export default { getAll, getById, deleteAll, ProductRegister, deleteOne, Update }

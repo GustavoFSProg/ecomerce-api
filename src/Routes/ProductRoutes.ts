@@ -17,5 +17,6 @@ ProductsRoutes.post(
 )
 ProductsRoutes.put('/update/:id', ProductController.Update)
 ProductsRoutes.delete('/delete/:id', ProductController.deleteOne)
+// ProductsRoutes.delete('/deleteAll', ProductController.deleteAll)
 
 export default ProductsRoutes
