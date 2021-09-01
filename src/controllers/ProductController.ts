@@ -78,23 +78,23 @@ async function deleteOne(req: Request, res: Response) {
   }
 }
 
-async function deleteAll(req: Request, res: Response) {
-  try {
-    const { id } = req.params
+// async function deleteAll(req: Request, res: Response) {
+//   try {
+//     const { id } = req.params
 
-    const imagem = await productModel.findById(id)
+//     const imagem = await productModel.findById(id)
 
-    await productModel.deleteMany()
+//     await productModel.deleteMany()
 
-    fs.unlink(`uploads/${imagem.image}`, (err) => {
-      if (err) throw err
-      console.log('uploads/file.txt was deleted')
-    })
+//     fs.unlink(`uploads/${imagem.image}`, (err) => {
+//       if (err) throw err
+//       console.log('uploads/file.txt was deleted')
+//     })
 
-    return res.status(201).send({ message: 'Product Deleted with success!' })
-  } catch (error) {
-    return res.status(400).send({ Mensagem: 'All cagado!!', error })
-  }
-}
+//     return res.status(201).send({ message: 'Product Deleted with success!' })
+//   } catch (error) {
+//     return res.status(400).send({ Mensagem: 'All cagado!!', error })
+//   }
+// }
 
-export default { getAll, getById, deleteAll, ProductRegister, deleteOne, Update }
+export default { getAll, getById, ProductRegister, deleteOne, Update }
